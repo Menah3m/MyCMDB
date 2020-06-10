@@ -6,10 +6,10 @@ USER = "root"
 PWD = 123
 
 PLUGIN_DICT = {
-    'basic': 'basic.Basic',
-    'cpu': 'cpu.Cpu',
-    'disk': 'disk.Disk',
-    'memory': 'memory.Memory',
-    'nic': 'nic.Nic',
+    'basic': 'src.plugins.basic.Basic',
+    'cpu': 'src.plugins.cpu.Cpu',
+    'disk': 'src.plugins.disk.Disk',
+    'memory': 'src.plugins.memory.Memory',
+    'nic': 'src.plugins.nic.Nic',
 }
 

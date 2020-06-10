@@ -11,5 +11,5 @@ class Disk(object):
 
     def process(self):
 
-        print("This is Disk Infomation Collector")
+        return ("This is Disk Infomation Collector")
         

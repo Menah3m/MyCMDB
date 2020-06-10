@@ -11,7 +11,7 @@ class Nic(object):
 
     def process(self):
 
-        print("This is NIC Infomation Collector")
+        return ("This is NIC Infomation Collector")
 
 
         

@@ -11,5 +11,5 @@ class Memory(object):
 
     def process(self):
 
-        print("This is Memory Infomation Collector")
+        return ("This is Memory Infomation Collector")
         

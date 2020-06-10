@@ -11,7 +11,7 @@ class Cpu(object):
 
     def process(self):
 
-        print("This is CPU Infomation Collector")
+        return ("This is CPU Infomation Collector")
         
 
     

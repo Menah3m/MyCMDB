@@ -7,7 +7,8 @@ from src.plugins import basic, cpu, disk, memory, nic
 
 if __name__ == '__main__':
 
-    PluginManager().execute()
+    res = PluginManager().execute()
+    print(res)
     # basic.Basic().process()
     # cpu.Cpu().process()
     # memory.Memory().process()
