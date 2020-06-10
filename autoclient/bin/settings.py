@@ -1,5 +1,5 @@
-from conf import setting
-from . import global_settings
+import setting
+import global_settings
 
 
 class Settings():
