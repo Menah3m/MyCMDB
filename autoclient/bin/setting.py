@@ -5,3 +5,5 @@
 USER = "root"
 PWD = 123
 
+MODE = 
+
