@@ -1,7 +1,7 @@
 # 配置信息的实现
 
-import setting
-import global_settings
+from conf import setting
+from . import global_settings
 
 
 class Settings():
