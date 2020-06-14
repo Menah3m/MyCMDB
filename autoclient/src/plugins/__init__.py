@@ -28,26 +28,36 @@ class PluginManager(object):
 
     def _cmd_run(self, cmd):
         if self.mode == 'agent':
-            import subprocess
-            res = subprocess.getoutput(cmd)
-            return res
-            
+            return self.__cmd_agent(cmd)   
         elif self.mode =='ssh':
-            import paramiko
-            # 创建ssh对象
-            ssh = paramiko.SSHClient()
-            #允许连接不在know_hosts列表文件中的主机
-            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            #连接服务器
-            ssh.connect(hostname='', port=22, username='root', password='123')
-            #执行命令
-            stdin, stdout, stderr = ssh.exec_command(cmd)
-            #获取命令结果
-            res = stdout.read()
-            #关闭连接
-            ssh.close
-            return res
+            return self.__cmd_ssh(cmd)
+        elif self.mode == 'salt':
+            return self.__cmd_salt(cmd)  
         else:
-            import subprocess
-            res = subprocess.getoutput("salt ' ' cmd.run 'ifconfig'")
-            return res
+            raise Exception("当前支持的模式只有：agent/ssh/salt模式")
+    
+    def __cmd_agent(self, cmd):
+        import subprocess
+        res = subprocess.getoutput(cmd)
+        return res
+
+    def __cmd_ssh(self, cmd):
+        import paramiko
+        # 创建ssh对象
+        ssh = paramiko.SSHClient()
+        #允许连接不在know_hosts列表文件中的主机
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        #连接服务器
+        ssh.connect(hostname='', port=22, username='root', password='123')
+        #执行命令
+        stdin, stdout, stderr = ssh.exec_command(cmd)
+        #获取命令结果
+        res = stdout.read()
+        #关闭连接
+        ssh.close
+        return res
+
+    def __cmd_salt(self, cmd):
+        import subprocess
+        res = subprocess.getoutput("salt ' ' cmd.run '%s'")
+        return res
