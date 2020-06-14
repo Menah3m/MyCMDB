@@ -9,7 +9,7 @@ from lib.config.settings import settings
 
 class Cpu(object):
 
-    def process(self):
+    def process(self, command_func):
 
         return ("This is CPU Infomation Collector")
         

@@ -9,7 +9,7 @@ from lib.config.settings import settings
 
 class Nic(object):
 
-    def process(self):
+    def process(self, command_func):
 
         return ("This is NIC Infomation Collector")
 

@@ -12,6 +12,11 @@ from lib.config.settings import settings
 
 class Basic(object):
 
-    def process(self):
+    def process(self, command_func):
+        
+        res = command_func('hostname')
+        self.parse(res)
 
-        return ("This is Basic Infomation Collector")
+    def parse(self, res):
+        ### 数据筛选
+        pass

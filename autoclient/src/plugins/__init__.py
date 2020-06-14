@@ -4,6 +4,7 @@ import importlib
 class PluginManager(object):
     def __init__(self):
         self.plugin_dict = settings.PLUGIN_DICT
+        self.mode = settings.MODE
     
     ### 管理配置文件中采集的插件
     def execute(self):
@@ -21,6 +22,32 @@ class PluginManager(object):
             ## 如何将一个包以字符串形式导入
             module_path = importlib.import_module(module_name)
             cls = getattr(module_path, class_name)
-            res = cls().process()
+            res = cls().process(self._cmd_run)
             response[k] = res
         return response
+
+    def _cmd_run(self, cmd):
+        if self.mode == 'agent':
+            import subprocess
+            res = subprocess.getoutput(cmd)
+            return res
+            
+        elif self.mode =='ssh':
+            import paramiko
+            # 创建ssh对象
+            ssh = paramiko.SSHClient()
+            #允许连接不在know_hosts列表文件中的主机
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            #连接服务器
+            ssh.connect(hostname='', port=22, username='root', password='123')
+            #执行命令
+            stdin, stdout, stderr = ssh.exec_command(cmd)
+            #获取命令结果
+            res = stdout.read()
+            #关闭连接
+            ssh.close
+            return res
+        else:
+            import subprocess
+            res = subprocess.getoutput("salt ' ' cmd.run 'ifconfig'")
+            return res
