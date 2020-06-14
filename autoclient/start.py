@@ -6,12 +6,16 @@ from src.plugins import PluginManager
 from src.plugins import basic, cpu, disk, memory, nic
 
 if __name__ == '__main__':
+    
 
-    host_list = ['10.0.0.100', '10.0.0.101']
-    for host in host_list：
-        
     res = PluginManager().execute()
     print(res)
+    # ssh
+    # host_list = ['c1.com', 'c2.com']
+    # for host in host_list：
+    #     res = PluginManager(host).execute()
+    #     print(res)
+
     # basic.Basic().process()
     # cpu.Cpu().process()
     # memory.Memory().process()

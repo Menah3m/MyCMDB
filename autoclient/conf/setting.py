@@ -1,5 +1,6 @@
-#
+import os
 
+BASEDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 自定义的配置信息
 USER = "root"
@@ -12,7 +13,7 @@ SSH_PWD = '123'
 SSH_PORT = 22
 
 
-
+DEBUG = True
 
 
 PLUGIN_DICT = {

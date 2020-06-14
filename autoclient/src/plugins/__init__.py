@@ -6,6 +6,7 @@ class PluginManager(object):
         self.plugin_dict = settings.PLUGIN_DICT
         self.mode = settings.MODE
         self.hostname = hostname
+        self.debug = settings.DEBUG
         if self.mode = 'ssh':
             self.user = settings.SSH_USER
             self.pwd = settings.SSH_PWD
@@ -23,7 +24,7 @@ class PluginManager(object):
             ## 如何将一个包以字符串形式导入
             module_path = importlib.import_module(module_name)
             cls = getattr(module_path, class_name)
-            res = cls().process(self._cmd_run)
+            res = cls().process(self._cmd_run, self.debug)
             response[k] = res
         return response
 
