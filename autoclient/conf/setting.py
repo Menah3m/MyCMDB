@@ -19,8 +19,10 @@ DEBUG = True
 PLUGIN_DICT = {
     'basic': 'src.plugins.basic.Basic',
     'cpu': 'src.plugins.cpu.Cpu',
+    'board':'src.Plugins.board.Board',
     'disk': 'src.plugins.disk.Disk',
     'memory': 'src.plugins.memory.Memory',
     'nic': 'src.plugins.nic.Nic',
+
 }
 

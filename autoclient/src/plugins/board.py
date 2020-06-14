@@ -10,7 +10,7 @@ Serial Number：
 import os
 from lib.config.settings import settings
 
-class Basic(object):
+class Board(object):
 
     def process(self, command_func, debug):
         if debug:
