@@ -2,10 +2,15 @@ from lib.config.settings import settings
 import importlib
 
 class PluginManager(object):
-    def __init__(self):
+    def __init__(self, hostname=None):
         self.plugin_dict = settings.PLUGIN_DICT
         self.mode = settings.MODE
-    
+
+        if self.mode = 'ssh':
+            self.hostname = hostname
+            self.user = settings.SSH_USER
+            self.pwd = settings.SSH_PWD
+            self.port = settings.SSH_PORT
     ### 管理配置文件中采集的插件
     def execute(self):
         
@@ -14,10 +19,7 @@ class PluginManager(object):
         for k, v in self.plugin_dict.items():
             ## k: basic
             ## v: src.plugins.basic.Basic
-            module_name, class_name = v.rsplit('.', 1)
-            
-            
-            
+            module_name, class_name = v.rsplit('.', 1)   
         # 2.将value中的 类 导入并实例化，然后执行process
             ## 如何将一个包以字符串形式导入
             module_path = importlib.import_module(module_name)
@@ -29,7 +31,7 @@ class PluginManager(object):
     def _cmd_run(self, cmd):
         if self.mode == 'agent':
             return self.__cmd_agent(cmd)   
-        elif self.mode =='ssh':
+        elif self.mode =='ssh':            
             return self.__cmd_ssh(cmd)
         elif self.mode == 'salt':
             return self.__cmd_salt(cmd)  
@@ -48,7 +50,7 @@ class PluginManager(object):
         #允许连接不在know_hosts列表文件中的主机
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         #连接服务器
-        ssh.connect(hostname='', port=22, username='root', password='123')
+        ssh.connect(hostname=self.hostname, port=self.port, username=self.user, password=self.pwd)
         #执行命令
         stdin, stdout, stderr = ssh.exec_command(cmd)
         #获取命令结果
