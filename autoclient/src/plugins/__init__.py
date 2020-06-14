@@ -5,9 +5,8 @@ class PluginManager(object):
     def __init__(self, hostname=None):
         self.plugin_dict = settings.PLUGIN_DICT
         self.mode = settings.MODE
-
+        self.hostname = hostname
         if self.mode = 'ssh':
-            self.hostname = hostname
             self.user = settings.SSH_USER
             self.pwd = settings.SSH_PWD
             self.port = settings.SSH_PORT
@@ -61,5 +60,5 @@ class PluginManager(object):
 
     def __cmd_salt(self, cmd):
         import subprocess
-        res = subprocess.getoutput("salt ' ' cmd.run '%s'")
+        res = subprocess.getoutput("salt '%s' cmd.run '%s'"%(self.hostname, cmd))
         return res
