@@ -7,7 +7,7 @@ class PluginManager(object):
         self.mode = settings.MODE
         self.hostname = hostname
         self.debug = settings.DEBUG
-        if self.mode = 'ssh':
+        if self.mode == 'ssh':
             self.user = settings.SSH_USER
             self.pwd = settings.SSH_PWD
             self.port = settings.SSH_PORT
